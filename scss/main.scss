@@ -1,0 +1,179 @@
+@charset "utf-8";
+/* CSS Document */
+
+.wrapper{
+	width: 800px;
+	margin: 0 auto;
+}
+.transformers,
+.transitions,
+.animations{
+	border: 1px solid #999;
+	margin: 20px 0;
+	padding: 0 0;
+}
+.box{
+	width: 200px;
+	height: 200px;
+}
+
+.b1{
+	background-color: #0074D9; /*blue*/
+}
+.b2{
+	background-color: #FF851B; /*orange*/
+}
+.b3{
+	background-color: #01FF70;/*green*/
+}
+.b4{
+	background-color:#B10DC9;/*purple*/
+}
+.b5{
+	background-color: #7FDBFF;/*light blue*/
+}
+
+.transformers .b1:hover{
+	transform: translate(20px, 30px);
+	/*
+		We can also define translateX() or translateY separately
+	*/
+}
+
+.transformers .b2:hover{
+	transform: scale(1.2,1.2);
+	/* we can also define scaleX and scaleY separately*/
+}
+.transformers .b3{
+	transform: rotate(45deg);
+	transform-origin: right bottom;
+	/*
+		Transform origin can be set using 2 or 3 values
+		x, y and z
+		units can be x-axis left, right, center, length, %
+		y-axis top, bottom, center, length, %
+		z-axis length
+	*/
+}
+.transformers .b4{
+	/*We can define multiple transforms at once by separating them with space*/
+	transform: skewX(45deg) skewY(30deg) ;
+}
+
+/****************************************************
+				Transitions
+*****************************************************/
+.transitions .b1{
+	/*
+		Transitions are defined for different properties of an element
+		the first value is property
+		second is time
+		third is the transition-timing-funtion effect - by default linear
+	*/
+	transition: width 1000ms ease-in-out;
+	/*
+		we can aslo define each transition function individually
+		transition-property: width;
+	    transition-duration: 2s;
+	    transition-timing-function: linear;
+	*/
+}
+.transitions .b1:hover{
+	width: 400px;
+	height: 150px;
+}
+.transitions .b2{
+	/* Multiple transitions can be defined comma separated */
+	transition: width 1000ms,  height 500ms;
+	/* We can define transition timing function separately as well*/
+	transition-timing-function: ease-out;
+
+	/* transition-delay can delay the transition by given time */
+	transition-delay: .5s;
+}
+.transitions .b2:hover{
+	width: 250px;
+	height: 250px;
+}
+.transitions .b3{
+	/* Also we can define
+		transition-property,
+		transition-duration,
+		transition-timing-function  and
+		transition-delay in one place respectively
+	*/
+	transition: transform 1s ease-in 1s;
+}
+.transitions .b3:hover{
+	transform: translate(20px, 20px);
+}
+.transitions .b4{
+	transition: all 1s ease-in;
+}
+.transitions .b4:hover{
+	background-color: #FF851B; /*orange*/
+	border-radius: 30px;
+}
+
+/*******************************************
+		Animations
+********************************************/
+/*
+	CSS Animation can used to change as many styles of an element as many times we want
+	To use animation we need to define keyframes for animation by using @keyframes rule
+	Then we need to call the defined animation inside an element using animation-name and animation-duration properties
+*/
+
+
+@keyframes changeColor{
+
+}
+
+/* using @keyframes rule we define name of the animation */
+@keyframes transformMove{
+  /* insdie the rule we use "from" and "to" to provide values for the starting and ending states */
+	// from{ 	background-color: red;	}
+	// to{ 	background-color: green;	}
+  /*
+  	from represents 0% completion and to represents 100% completion
+  	We can also use % to define style changes for different parts of the animation like, 0%, 25%, 50%, 70%, 100%
+  */
+	0%{ transform: scale(.5,.5) rotateX(0) translateX(0); }
+	50%{ transform: scale(1,1) rotateX(180deg) translateX(600px); }
+	100%{ transform: scale(.5,.5) rotateX(0) translateX(0); }
+}
+
+.animations .b1{
+  /*
+		we can call the defined animation inside an element using animation-name and animation-duration properties
+	*/
+	animation: transformMove;
+	animation-duration: 3s;
+
+  /* we can also add a delay to the animation using animation-delay property */
+  animation-delay: 3s;
+
+  /*
+    By using animation-iteration-count property we can define how many times an animation should run
+    Values for animation-iteration-count can be-
+    Numeric for number of times
+    infinite - to keep looping though the animation
+  */
+  animation-iteration-count: 6;
+
+  /*
+    Just as transitions we have a timing function for animations as well
+    we can use animation-timing-function to define these properties
+  */
+  animation-timing-function: ease-in-out;
+}
+
+.animations .b2{
+	/*
+	Using animation shorthand notation
+	The values are assigned in following order
+	  name duration   delay iteration-count direction fill-mode timing
+	{---required----}{---------------optional--------------------------}
+	*/
+	animation: transformMove 3s 0s infinite alternate forwards linear;
+}
